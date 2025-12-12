@@ -1,0 +1,3 @@
+[submodule "Lessons-modules"]
+	path = Lessons-modules
+	url = git@github.com:fboudry/Lessons-modules.git
