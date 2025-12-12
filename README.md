@@ -1,9 +1,10 @@
 # Lesson Template Repository
 
-This repository is a template for creating lessons based on Quarto files. Each file in the `lecture/`, `tutorial/` and `practicum/` directories is a separate module, and a global file (`template.qmd`) combines them into a complete lesson.
+This repository is a template for creating lessons based on Quarto files. Each file in the `lecture/`, `tutorial/` and `practicum/` directories is a separate module, and a global file (`template.qmd`) combines them into a complete lesson. Alternatively you can use a git submodule containing all your modules, set up as `Lessons-modules` in this template.
 
 ## Directory Structure
 
+- `Lessons-modules`: Contrains all modules in an external repository.
 - `lecture/`: Contains individual lesson modules.
 - `tutorial/`: Contains individual tutorial modules.
 - `practicum/`: Contains individual practicum modules.

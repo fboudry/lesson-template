@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build:
+  quarto-render:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,6 +19,11 @@ jobs:
       - name: Render Quarto files
         run: quarto render -M embed-resources:true --output-dir output/
 
+  external-send:
+    needs: quarto-render
+    if: ${{ secrets.DEST_REPO != '' }}
+    runs-on: ubuntu-latest
+    steps:
       - name: Commit and push rendered files
         run: |
           git config --global user.email ${{ github.event.pusher.email || 'default@example.com' }}
@@ -26,7 +31,7 @@ jobs:
           git clone ${{ secrets.DEST_REPO }} ../dest_repo
           mkdir -p ../dest_repo/${{ github.event.repository.name }}
           rm -rf ../dest_repo/${{ github.event.repository.name }}/*
-          mv output/* ../dest_repo/${{ github.event.repository.name }}
+          cp output/* ../dest_repo/${{ github.event.repository.name }}
           cd ../dest_repo
           git add .
           git commit -m "GitHub Actions: Rendered Quarto files"
