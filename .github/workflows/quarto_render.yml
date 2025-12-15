@@ -21,10 +21,12 @@ jobs:
 
   external-send:
     needs: quarto-render
-    if: ${{ secrets.DEST_REPO != '' }}
     runs-on: ubuntu-latest
     steps:
       - name: Commit and push rendered files
+        env: 
+          DEST_REPO: ${{ secrets.DEST_REPO }}
+        if: ${{ env.DEST_REPO != '' }}
         run: |
           git config --global user.email ${{ github.event.pusher.email || 'default@example.com' }}
           git config --global user.name ${{ github.event.pusher.name || 'default-username'}}
